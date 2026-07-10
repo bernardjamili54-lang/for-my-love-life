@@ -16,7 +16,7 @@
     </ul>
 
     <h2>My Hobbies</h2>
-    <ul type="square"> <!-- List attribute example -->
+    <ul type="square"> <!-- List attribute -->
         <li>Playing Basketball</li>
         <li>Watching Movies</li>
         <li>Coding</li>
