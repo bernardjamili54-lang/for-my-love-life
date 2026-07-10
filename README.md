@@ -12,7 +12,7 @@
         <li><strong>Name:</strong>Bernard jamili C</li>
         <li><strong>Age:</strong> 16</li>
         <li><strong>Location:</strong> Lapu-Lapu City</li>
-        <li><strong>Email:</strong> your.email@example.com</li>
+        <li><strong>Email:</strong>bernardojamili54@gmail.com/li>
     </ul>
 
     <h2>My Hobbies</h2>
