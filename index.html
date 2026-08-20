@@ -1,55 +1,603 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Personal Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Letter For You 💌</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: "Georgia", serif;
+            background: linear-gradient(135deg, #1a0b18, #4a1735, #7b234f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        /* Romantic glowing background */
+        .background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            animation: moveGlow 8s infinite alternate ease-in-out;
+        }
+
+        .glow:nth-child(1) {
+            background: #ff4f9a;
+            top: -100px;
+            left: -100px;
+        }
+
+        .glow:nth-child(2) {
+            background: #ff9ecb;
+            bottom: -100px;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        @keyframes moveGlow {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(80px, 50px);
+            }
+        }
+
+        /* Main container */
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            padding: 20px;
+        }
+
+        .title {
+            margin-bottom: 35px;
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 150, 200, 0.8);
+            animation: fadeIn 2s ease;
+        }
+
+        /* Envelope */
+        .envelope-wrapper {
+            position: relative;
+            width: 330px;
+            height: 220px;
+            margin: auto;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #f8d7e5;
+            border-radius: 5px;
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.45),
+                0 0 30px rgba(255, 130, 180, 0.3);
+        }
+
+        /* Envelope bottom */
+        .envelope::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-left: 165px solid transparent;
+            border-right: 165px solid transparent;
+            border-bottom: 120px solid #edb6cd;
+            z-index: 4;
+        }
+
+        /* Envelope sides */
+        .envelope::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-top: 110px solid transparent;
+            border-left: 165px solid #f3c6d9;
+            border-right: 165px solid #e8aac5;
+            z-index: 3;
+        }
+
+        /* Envelope flap */
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 165px solid transparent;
+            border-right: 165px solid transparent;
+            border-top: 120px solid #f4c3d7;
+            transform-origin: top center;
+            transition: transform 1s ease;
+            z-index: 5;
+        }
+
+        /* Letter */
+        .letter {
+            position: absolute;
+            width: 285px;
+            height: 390px;
+            background: #fffafc;
+            color: #4b2637;
+            left: 22px;
+            bottom: 5px;
+            border-radius: 5px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            transition: all 1.2s ease;
+            z-index: 2;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .letter h2 {
+            font-size: 24px;
+            color: #a52b5b;
+            margin-bottom: 18px;
+        }
+
+        .letter p {
+            font-size: 16px;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .signature {
+            margin-top: 20px;
+            text-align: right;
+            font-style: italic;
+            color: #a52b5b;
+        }
+
+        /* Open state */
+        .envelope-wrapper.open .flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.open .letter {
+            transform: translateY(-250px);
+            opacity: 1;
+            z-index: 6;
+        }
+
+        .envelope-wrapper.open {
+            margin-top: 120px;
+        }
+
+        /* Click text */
+        .instruction {
+            margin-top: 30px;
+            font-size: 15px;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Floating hearts */
+        .heart {
+            position: fixed;
+            bottom: -30px;
+            font-size: 20px;
+            pointer-events: none;
+            animation: floatHeart linear forwards;
+            z-index: 10;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) scale(0.7) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Confession */
+        .confession {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 5, 15, 0.92);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 1s ease;
+            z-index: 100;
+        }
+
+        .confession.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .confession-box {
+            max-width: 650px;
+            text-align: center;
+        }
+
+        .confession-box h1 {
+            font-size: 42px;
+            color: #ff9fc8;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(255, 100, 170, 0.8);
+        }
+
+        .confession-box p {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #fff0f6;
+        }
+
+        .big-heart {
+            font-size: 70px;
+            margin-bottom: 15px;
+            animation: heartbeat 1.3s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .close-btn {
+            margin-top: 30px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            background: #e75480;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            background: #ff7faa;
+            transform: scale(1.05);
+        }
+
+        /* Typing cursor */
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 20px;
+            background: #a52b5b;
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .title {
+                font-size: 22px;
+            }
+
+            .envelope-wrapper {
+                width: 280px;
+                height: 190px;
+            }
+
+            .envelope::after {
+                border-left-width: 140px;
+                border-right-width: 140px;
+                border-bottom-width: 105px;
+            }
+
+            .envelope::before {
+                border-left-width: 140px;
+                border-right-width: 140px;
+            }
+
+            .flap {
+                border-left-width: 140px;
+                border-right-width: 140px;
+                border-top-width: 105px;
+            }
+
+            .letter {
+                width: 240px;
+                height: 350px;
+                left: 20px;
+                padding: 25px 20px;
+            }
+
+            .letter p {
+                font-size: 14px;
+            }
+
+            .confession-box h1 {
+                font-size: 32px;
+            }
+
+            .confession-box p {
+                font-size: 17px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>About Me</h1>
-    
-    <h2>Personal Information</h2>
-    <ul>
-        <li><strong>Name:</strong>Bernard jamili C</li>
-        <li><strong>Age:</strong> 16</li>
-        <li><strong>Location:</strong> Lapu-Lapu City</li>
-        <li><strong>Email:</strong>bernardojamili54@gmail.com/li>
-    </ul>
 
-    <h2>My Hobbies</h2>
-    <ul type="square"> <!-- List attribute -->
-        <li>Playing Basketball</li>
-        <li>Watching Movies</li>
-        <li>Coding</li>
-        <li>Reading</li>
-    </ul>
+    <!-- Background -->
+    <div class="background">
+        <div class="glow"></div>
+        <div class="glow"></div>
+    </div>
 
-    <h2>Top 5 Goals This Year</h2>
-    <ol type="1" start="1"> <!-- Ordered list attribute -->
-        <li>Pass all subjects</li>
-        <li>Learn HTML and CSS</li>
-        <li>Build a portfolio website</li>
-        <li>Exercise regularly</li>
-        <li>Travel to new places</li>
-    </ol>
+    <div class="container">
 
-    <h2>Skills</h2>
-    <dl> <!-- Description list -->
-        <dt>HTML</dt>
-        <dd>Building structure of webpages</dd>
-        
-        <dt>CSS</dt>
-        <dd>Styling webpages</dd>
-        
-        <dt>Communication</dt>
-        <dd>Good at teamwork and presenting</dd>
-    </dl>
+        <div class="title">
+            💌 I Have Something to Tell You...
+        </div>
 
-    <h2>Social Media</h2>
-    <ul>
-        <li><a href="https://bernardo jamili.com">Facebook</a></li>
-        <li><a href="https://bernardjamili54.com">GitHub</a></li>
-    </ul>
+        <!-- Envelope -->
+        <div class="envelope-wrapper" id="envelope">
+
+            <div class="envelope">
+
+                <div class="flap"></div>
+
+                <div class="letter">
+                    <h2>Dear You, ❤️</h2>
+
+                    <p id="letterText"></p>
+
+                    <div class="signature">
+                        — From someone who likes you more than you know 💕
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="instruction" id="instruction">
+            Click the envelope to open it 💗
+        </div>
+
+    </div>
+
+    <!-- Final confession -->
+    <div class="confession" id="confession">
+
+        <div class="confession-box">
+
+            <div class="big-heart">❤️</div>
+
+            <h1>So... I Like You.</h1>
+
+            <p>
+                I don't know exactly when it happened,
+                but somehow, you became someone special to me.
+                <br><br>
+
+                And honestly, whenever I see your face,
+                especially when you're smiling,
+                my mind suddenly goes blank.
+                I forget what I was about to say,
+                and somehow, all I can think about is
+                how beautiful your smile is.
+                <br><br>
+
+                I just wanted you to know...
+                <br><br>
+
+                <strong>
+                    I really, really like you. ❤️
+                </strong>
+            </p>
+
+            <button class="close-btn" onclick="closeConfession()">
+                Keep this little secret 🤫
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const envelope = document.getElementById("envelope");
+        const instruction = document.getElementById("instruction");
+        const letterText = document.getElementById("letterText");
+        const confession = document.getElementById("confession");
+
+        let opened = false;
+
+        const message =
+            "I have been wanting to tell you this for a while. " +
+            "There is something about you that makes ordinary moments feel a little more special. " +
+            "I love seeing you smile, and every time I do, I somehow forget what I was about to say. " +
+            "My words disappear, my thoughts get mixed up, and all I can think about is your smile. " +
+            "Maybe this is a little embarrassing to admit, but I really like you. " +
+            "I don't expect anything from you. I just wanted to be honest about how I feel. ❤️";
+
+        /* Envelope click */
+        envelope.addEventListener("click", function () {
+
+            if (opened) return;
+
+            opened = true;
+
+            envelope.classList.add("open");
+
+            instruction.innerHTML = "Something special is waiting for you... 💕";
+
+            setTimeout(() => {
+                typeLetter();
+            }, 900);
+
+            setTimeout(() => {
+                createHeartBurst();
+            }, 1000);
+
+            setTimeout(() => {
+                confession.classList.add("show");
+                createHearts();
+            }, 10000);
+
+        });
+
+        /* Typing effect */
+        let index = 0;
+
+        function typeLetter() {
+
+            if (index < message.length) {
+
+                letterText.innerHTML =
+                    message.substring(0, index + 1) +
+                    '<span class="cursor"></span>';
+
+                index++;
+
+                setTimeout(typeLetter, 35);
+
+            } else {
+
+                letterText.innerHTML = message;
+            }
+        }
+
+        /* Floating hearts */
+        function createHeart() {
+
+            const heart = document.createElement("div");
+
+            heart.classList.add("heart");
+
+            const hearts = ["❤️", "💕", "💗", "💖", "💘", "💓"];
+
+            heart.innerHTML =
+                hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.fontSize =
+                (15 + Math.random() * 25) + "px";
+
+            heart.style.animationDuration =
+                (5 + Math.random() * 5) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+
+        function createHearts() {
+
+            setInterval(createHeart, 400);
+        }
+
+        /* Heart burst when envelope opens */
+        function createHeartBurst() {
+
+            for (let i = 0; i < 25; i++) {
+
+                setTimeout(() => {
+
+                    const heart = document.createElement("div");
+
+                    heart.classList.add("heart");
+
+                    heart.innerHTML = "❤️";
+
+                    heart.style.left = "50%";
+                    heart.style.bottom = "45%";
+
+                    heart.style.fontSize =
+                        (15 + Math.random() * 25) + "px";
+
+                    heart.style.animationDuration =
+                        (2 + Math.random() * 2) + "s";
+
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5000);
+
+                }, i * 80);
+            }
+        }
+
+        /* Close confession */
+        function closeConfession() {
+
+            confession.classList.remove("show");
+
+            instruction.innerHTML =
+                "You found my little secret. 💗";
+        }
+
+        /* Initial floating hearts */
+        for (let i = 0; i < 8; i++) {
+            setTimeout(createHeart, i * 500);
+        }
+
+    </script>
 
 </body>
 </html>
-bernardojamili54.gmail.com
+```
