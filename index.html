@@ -1,602 +1,1853 @@
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Little Letter For You 💌</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<title>For Someone Special ❤️</title>
 
-        body {
-            min-height: 100vh;
-            overflow: hidden;
-            font-family: "Georgia", serif;
-            background: linear-gradient(135deg, #1a0b18, #4a1735, #7b234f);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-        }
+<style>
 
-        /* Romantic glowing background */
-        .background {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            z-index: -1;
-        }
+/* =====================================================
+   RESET
+===================================================== */
 
-        .glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.35;
-            animation: moveGlow 8s infinite alternate ease-in-out;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .glow:nth-child(1) {
-            background: #ff4f9a;
-            top: -100px;
-            left: -100px;
-        }
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
 
-        .glow:nth-child(2) {
-            background: #ff9ecb;
-            bottom: -100px;
-            right: -100px;
-            animation-delay: 2s;
-        }
+body {
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
 
-        @keyframes moveGlow {
-            from {
-                transform: translate(0, 0);
-            }
+    background:
+        radial-gradient(
+            circle at center,
+            #35142f 0%,
+            #170b1d 45%,
+            #05030a 100%
+        );
 
-            to {
-                transform: translate(80px, 50px);
-            }
-        }
+    color: white;
+}
 
-        /* Main container */
-        .container {
-            text-align: center;
-            width: 100%;
-            max-width: 700px;
-            padding: 20px;
-        }
 
-        .title {
-            margin-bottom: 35px;
-            font-size: 28px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(255, 150, 200, 0.8);
-            animation: fadeIn 2s ease;
-        }
+/* =====================================================
+   STAR BACKGROUND
+===================================================== */
 
-        /* Envelope */
-        .envelope-wrapper {
-            position: relative;
-            width: 330px;
-            height: 220px;
-            margin: auto;
-            cursor: pointer;
-            perspective: 1000px;
-        }
+#stars {
+    position: fixed;
+    inset: 0;
 
-        .envelope {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: #f8d7e5;
-            border-radius: 5px;
-            box-shadow:
-                0 20px 50px rgba(0, 0, 0, 0.45),
-                0 0 30px rgba(255, 130, 180, 0.3);
-        }
+    width: 100%;
+    height: 100%;
 
-        /* Envelope bottom */
-        .envelope::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            border-left: 165px solid transparent;
-            border-right: 165px solid transparent;
-            border-bottom: 120px solid #edb6cd;
-            z-index: 4;
-        }
+    z-index: 1;
+}
 
-        /* Envelope sides */
-        .envelope::before {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            border-top: 110px solid transparent;
-            border-left: 165px solid #f3c6d9;
-            border-right: 165px solid #e8aac5;
-            z-index: 3;
-        }
 
-        /* Envelope flap */
-        .flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 165px solid transparent;
-            border-right: 165px solid transparent;
-            border-top: 120px solid #f4c3d7;
-            transform-origin: top center;
-            transition: transform 1s ease;
-            z-index: 5;
-        }
+/* =====================================================
+   MOON
+===================================================== */
 
-        /* Letter */
-        .letter {
-            position: absolute;
-            width: 285px;
-            height: 390px;
-            background: #fffafc;
-            color: #4b2637;
-            left: 22px;
-            bottom: 5px;
-            border-radius: 5px;
-            padding: 30px 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            transition: all 1.2s ease;
-            z-index: 2;
-            overflow: hidden;
-            opacity: 0;
-        }
+.moon {
+    position: fixed;
 
-        .letter h2 {
-            font-size: 24px;
-            color: #a52b5b;
-            margin-bottom: 18px;
-        }
+    top: 9%;
+    right: 12%;
 
-        .letter p {
-            font-size: 16px;
-            line-height: 1.7;
-            text-align: left;
-        }
+    width: 90px;
+    height: 90px;
 
-        .signature {
-            margin-top: 20px;
-            text-align: right;
-            font-style: italic;
-            color: #a52b5b;
-        }
+    border-radius: 50%;
 
-        /* Open state */
-        .envelope-wrapper.open .flap {
-            transform: rotateX(180deg);
-            z-index: 1;
-        }
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff,
+            #ffe8f1 55%,
+            #e7b9ca
+        );
 
-        .envelope-wrapper.open .letter {
-            transform: translateY(-250px);
-            opacity: 1;
-            z-index: 6;
-        }
+    box-shadow:
+        0 0 30px rgba(255, 220, 235, .7),
+        0 0 90px rgba(255, 180, 210, .25);
 
-        .envelope-wrapper.open {
-            margin-top: 120px;
-        }
+    z-index: 2;
 
-        /* Click text */
-        .instruction {
-            margin-top: 30px;
-            font-size: 15px;
-            opacity: 0.8;
-            animation: pulse 2s infinite;
-        }
+    animation: moonGlow 4s ease-in-out infinite;
+}
 
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.5;
-            }
+@keyframes moonGlow {
 
-            50% {
-                opacity: 1;
-            }
-        }
+    0%,
+    100% {
+        box-shadow:
+            0 0 30px rgba(255,220,235,.6),
+            0 0 80px rgba(255,180,210,.2);
+    }
 
-        /* Floating hearts */
-        .heart {
-            position: fixed;
-            bottom: -30px;
-            font-size: 20px;
-            pointer-events: none;
-            animation: floatHeart linear forwards;
-            z-index: 10;
-        }
+    50% {
+        box-shadow:
+            0 0 45px rgba(255,220,235,.9),
+            0 0 120px rgba(255,180,210,.4);
+    }
+}
 
-        @keyframes floatHeart {
-            0% {
-                transform: translateY(0) scale(0.7) rotate(0deg);
-                opacity: 0;
-            }
 
-            15% {
-                opacity: 1;
-            }
+/* =====================================================
+   SHOOTING STARS
+===================================================== */
 
-            100% {
-                transform: translateY(-110vh) scale(1.5) rotate(360deg);
-                opacity: 0;
-            }
-        }
+.shooting-star {
 
-        /* Confession */
-        .confession {
-            position: fixed;
-            inset: 0;
-            background: rgba(20, 5, 15, 0.92);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 25px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 1s ease;
-            z-index: 100;
-        }
+    position: fixed;
 
-        .confession.show {
-            opacity: 1;
-            visibility: visible;
-        }
+    width: 120px;
+    height: 2px;
 
-        .confession-box {
-            max-width: 650px;
-            text-align: center;
-        }
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            white
+        );
 
-        .confession-box h1 {
-            font-size: 42px;
-            color: #ff9fc8;
-            margin-bottom: 25px;
-            text-shadow: 0 0 20px rgba(255, 100, 170, 0.8);
-        }
+    transform: rotate(-35deg);
 
-        .confession-box p {
-            font-size: 20px;
-            line-height: 1.8;
-            color: #fff0f6;
-        }
+    opacity: 0;
 
-        .big-heart {
-            font-size: 70px;
-            margin-bottom: 15px;
-            animation: heartbeat 1.3s infinite;
-        }
+    z-index: 3;
 
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
+    animation:
+        shootingStar 4s linear forwards;
+}
 
-            50% {
-                transform: scale(1.2);
-            }
-        }
+@keyframes shootingStar {
 
-        .close-btn {
-            margin-top: 30px;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 30px;
-            background: #e75480;
-            color: white;
-            font-size: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    0% {
+        transform:
+            translate(0, 0)
+            rotate(-35deg);
 
-        .close-btn:hover {
-            background: #ff7faa;
-            transform: scale(1.05);
-        }
+        opacity: 0;
+    }
 
-        /* Typing cursor */
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 20px;
-            background: #a52b5b;
-            animation: blink 0.7s infinite;
-            vertical-align: middle;
-        }
+    10% {
+        opacity: 1;
+    }
 
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
+    100% {
+        transform:
+            translate(-500px, 350px)
+            rotate(-35deg);
 
-        /* Mobile */
-        @media (max-width: 600px) {
-            .title {
-                font-size: 22px;
-            }
+        opacity: 0;
+    }
+}
 
-            .envelope-wrapper {
-                width: 280px;
-                height: 190px;
-            }
 
-            .envelope::after {
-                border-left-width: 140px;
-                border-right-width: 140px;
-                border-bottom-width: 105px;
-            }
+/* =====================================================
+   MAIN SCENE
+===================================================== */
 
-            .envelope::before {
-                border-left-width: 140px;
-                border-right-width: 140px;
-            }
+.scene {
 
-            .flap {
-                border-left-width: 140px;
-                border-right-width: 140px;
-                border-top-width: 105px;
-            }
+    position: fixed;
+    inset: 0;
 
-            .letter {
-                width: 240px;
-                height: 350px;
-                left: 20px;
-                padding: 25px 20px;
-            }
+    display: flex;
 
-            .letter p {
-                font-size: 14px;
-            }
+    justify-content: center;
+    align-items: center;
 
-            .confession-box h1 {
-                font-size: 32px;
-            }
+    z-index: 10;
 
-            .confession-box p {
-                font-size: 17px;
-            }
-        }
-    </style>
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+}
+
+.scene.hide {
+
+    opacity: 0;
+
+    transform:
+        scale(1.15);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro {
+
+    width: 90%;
+
+    max-width: 650px;
+
+    text-align: center;
+
+    animation:
+        introAppear 2s ease;
+}
+
+@keyframes introAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.intro-small {
+
+    font-size: 16px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    color: rgba(255,220,235,.7);
+
+    margin-bottom: 25px;
+}
+
+.intro h1 {
+
+    font-size: clamp(
+        38px,
+        7vw,
+        70px
+    );
+
+    font-weight: 400;
+
+    line-height: 1.1;
+
+    color: #fff3f8;
+
+    text-shadow:
+        0 0 20px rgba(255,120,180,.35);
+}
+
+.intro h1 span {
+
+    color: #ff9fc4;
+
+}
+
+.intro p {
+
+    margin-top: 25px;
+
+    font-size: 18px;
+
+    color: rgba(255,235,244,.7);
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+.start-button {
+
+    margin-top: 40px;
+
+    padding:
+        14px 35px;
+
+    border:
+        1px solid
+        rgba(255,180,210,.5);
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        .4s ease;
+}
+
+.start-button:hover {
+
+    background:
+        rgba(255,110,170,.2);
+
+    border-color:
+        #ff9fc4;
+
+    box-shadow:
+        0 0 30px
+        rgba(255,100,170,.25);
+
+    transform:
+        translateY(-4px);
+}
+
+
+/* =====================================================
+   STORY
+===================================================== */
+
+.story {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    z-index: 20;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 1.2s ease;
+}
+
+.story.active {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.story-content {
+
+    width: 90%;
+
+    max-width: 750px;
+}
+
+
+/* =====================================================
+   STORY TEXT
+===================================================== */
+
+.story-text {
+
+    font-size:
+        clamp(
+            24px,
+            4vw,
+            42px
+        );
+
+    line-height: 1.6;
+
+    font-weight: 400;
+
+    color: #fff1f6;
+
+    text-shadow:
+        0 0 20px
+        rgba(255,100,160,.2);
+
+    min-height: 120px;
+}
+
+.story-text .highlight {
+
+    color: #ff9fc4;
+
+}
+
+
+/* =====================================================
+   STORY PROGRESS
+===================================================== */
+
+.progress {
+
+    position: fixed;
+
+    bottom: 40px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.progress-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.2);
+
+    transition:
+        .5s ease;
+}
+
+.progress-dot.active {
+
+    background: #ff9fc4;
+
+    box-shadow:
+        0 0 12px
+        rgba(255,100,170,.8);
+
+}
+
+
+/* =====================================================
+   HEART
+===================================================== */
+
+.story-heart {
+
+    width: 100px;
+    height: 100px;
+
+    margin:
+        0 auto 35px;
+
+    position: relative;
+
+    transform:
+        rotate(-45deg);
+
+    background:
+        #e95486;
+
+    animation:
+        heartPulse 1.5s
+        ease-in-out infinite;
+
+    box-shadow:
+        0 0 50px
+        rgba(255,80,150,.5);
+}
+
+.story-heart::before,
+.story-heart::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    background:
+        #e95486;
+}
+
+.story-heart::before {
+
+    top: -50px;
+    left: 0;
+}
+
+.story-heart::after {
+
+    left: 50px;
+    top: 0;
+}
+
+@keyframes heartPulse {
+
+    0%,
+    100% {
+        transform:
+            rotate(-45deg)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            rotate(-45deg)
+            scale(1.12);
+    }
+}
+
+
+/* =====================================================
+   LETTER
+===================================================== */
+
+.letter-scene {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        rgba(8,3,10,.9);
+
+    z-index: 50;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 1.5s ease;
+}
+
+.letter-scene.show {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.paper {
+
+    width:
+        min(700px, 90vw);
+
+    height:
+        min(720px, 82vh);
+
+    overflow-y: auto;
+
+    padding:
+        clamp(35px, 6vw, 70px);
+
+    color: #4b2a37;
+
+    background:
+        linear-gradient(
+            rgba(255,252,242,.98),
+            rgba(255,247,233,.98)
+        );
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.6);
+
+    position: relative;
+
+    transform:
+        translateY(60px)
+        scale(.9)
+        rotate(-1deg);
+
+    animation:
+        paperOpen 1.5s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+
+    font-family:
+        Georgia,
+        serif;
+}
+
+@keyframes paperOpen {
+
+    to {
+
+        transform:
+            translateY(0)
+            scale(1)
+            rotate(0);
+
+    }
+}
+
+
+/* Paper border */
+
+.paper::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 18px;
+
+    border:
+        1px solid
+        rgba(130,70,90,.15);
+
+    pointer-events: none;
+}
+
+
+/* Paper lines */
+
+.paper::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50px;
+    right: 50px;
+
+    top: 180px;
+    bottom: 50px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 31px,
+            rgba(120,80,90,.08) 32px
+        );
+
+    pointer-events: none;
+}
+
+.paper h2 {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-family:
+        "Dancing Script",
+        cursive;
+
+    font-size: 42px;
+
+    color: #9d365a;
+
+    margin-bottom: 30px;
+}
+
+.paper-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-family:
+        "Dancing Script",
+        cursive;
+
+    font-size: 22px;
+
+    line-height: 1.8;
+
+    white-space: pre-line;
+}
+
+.signature {
+
+    margin-top: 35px;
+
+    text-align: right;
+
+    font-family:
+        "Dancing Script",
+        cursive;
+
+    font-size: 25px;
+
+    color: #9d365a;
+}
+
+
+/* =====================================================
+   FINAL CONFESSION
+===================================================== */
+
+.final {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #40142f,
+            #09030a
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 1.5s ease;
+}
+
+.final.show {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.final-content {
+
+    max-width: 750px;
+
+    animation:
+        finalAppear 2s ease;
+}
+
+@keyframes finalAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(40px)
+            scale(.9);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+}
+
+.final-heart {
+
+    font-size: 85px;
+
+    animation:
+        finalHeartbeat 1.4s infinite;
+}
+
+@keyframes finalHeartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.final h1 {
+
+    margin-top: 25px;
+
+    font-family:
+        "Dancing Script",
+        cursive;
+
+    font-size:
+        clamp(
+            45px,
+            8vw,
+            75px
+        );
+
+    font-weight: 500;
+
+    color: #ff9fc4;
+
+    text-shadow:
+        0 0 30px
+        rgba(255,80,150,.5);
+}
+
+.final p {
+
+    margin-top: 30px;
+
+    font-size: 20px;
+
+    line-height: 1.9;
+
+    color: #ffeef5;
+}
+
+.final strong {
+
+    color: #ffabc8;
+
+}
+
+
+/* =====================================================
+   FLOATING PETALS / HEARTS
+===================================================== */
+
+.particle {
+
+    position: fixed;
+
+    bottom: -40px;
+
+    z-index: 200;
+
+    pointer-events: none;
+
+    animation:
+        floatParticle
+        linear forwards;
+}
+
+@keyframes floatParticle {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg)
+            scale(.7);
+
+        opacity: 0;
+
+    }
+
+    15% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            translateY(-110vh)
+            translateX(
+                calc(
+                    -100px +
+                    200px * var(--random)
+                )
+            )
+            rotate(360deg)
+            scale(1.4);
+
+        opacity: 0;
+
+    }
+}
+
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+.music {
+
+    position: fixed;
+
+    right: 25px;
+    top: 25px;
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.2);
+
+    background:
+        rgba(255,255,255,.06);
+
+    color: white;
+
+    cursor: pointer;
+
+    z-index: 500;
+
+    backdrop-filter: blur(10px);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px) {
+
+    .moon {
+
+        width: 60px;
+        height: 60px;
+
+        right: 8%;
+        top: 7%;
+    }
+
+    .intro p {
+
+        font-size: 16px;
+
+    }
+
+    .story-text {
+
+        font-size: 25px;
+
+    }
+
+    .story-heart {
+
+        transform:
+            rotate(-45deg)
+            scale(.75);
+
+        margin-bottom: 5px;
+
+    }
+
+    .paper {
+
+        height: 82vh;
+
+        padding:
+            40px 28px;
+
+    }
+
+    .paper h2 {
+
+        font-size: 34px;
+
+    }
+
+    .paper-content {
+
+        font-size: 19px;
+
+        line-height: 1.7;
+
+    }
+
+    .signature {
+
+        font-size: 22px;
+
+    }
+
+    .final p {
+
+        font-size: 17px;
+
+    }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-    <!-- Background -->
-    <div class="background">
-        <div class="glow"></div>
-        <div class="glow"></div>
-    </div>
 
-    <div class="container">
+<!-- =====================================================
+     STARS
+===================================================== -->
 
-        <div class="title">
-            💌 I Have Something to Tell You...
+<canvas id="stars"></canvas>
+
+<div class="moon"></div>
+
+
+<!-- =====================================================
+     MUSIC BUTTON
+===================================================== -->
+
+<button
+    class="music"
+    id="musicButton"
+    title="Music"
+>
+    ♫
+</button>
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<div
+    class="scene"
+    id="introScene"
+>
+
+    <div class="intro">
+
+        <div class="intro-small">
+            A little secret
         </div>
 
-        <!-- Envelope -->
-        <div class="envelope-wrapper" id="envelope">
+        <h1>
+            This is something
+            <br>
+            <span>I've been wanting to tell you.</span>
+        </h1>
 
-            <div class="envelope">
+        <p>
+            So before I say anything...
+            just give me a few moments.
+        </p>
 
-                <div class="flap"></div>
-
-                <div class="letter">
-                    <h2>Dear You, ❤️</h2>
-
-                    <p id="letterText"></p>
-
-                    <div class="signature">
-                        — From someone who likes you more than you know 💕
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="instruction" id="instruction">
-            Click the envelope to open it 💗
-        </div>
-
-    </div>
-
-    <!-- Final confession -->
-    <div class="confession" id="confession">
-
-        <div class="confession-box">
-
-            <div class="big-heart">❤️</div>
-
-            <h1>So... I Like You.</h1>
-
-            <p>
-                I don't know exactly when it happened,
-                but somehow, you became someone special to me.
-                <br><br>
-
-                And honestly, whenever I see your face,
-                especially when you're smiling,
-                my mind suddenly goes blank.
-                I forget what I was about to say,
-                and somehow, all I can think about is
-                how beautiful your smile is.
-                <br><br>
-
-                I just wanted you to know...
-                <br><br>
-
-                <strong>
-                    I really, really like you. ❤️
-                </strong>
-            </p>
-
-            <button class="close-btn" onclick="closeConfession()">
-                Keep this little secret 🤫
-            </button>
-
-        </div>
+        <button
+            class="start-button"
+            id="startButton"
+        >
+            Begin ❤️
+        </button>
 
     </div>
 
-    <script>
+</div>
 
-        const envelope = document.getElementById("envelope");
-        const instruction = document.getElementById("instruction");
-        const letterText = document.getElementById("letterText");
-        const confession = document.getElementById("confession");
 
-        let opened = false;
+<!-- =====================================================
+     STORY
+===================================================== -->
 
-        const message =
-            "I have been wanting to tell you this for a while. " +
-            "There is something about you that makes ordinary moments feel a little more special. " +
-            "I love seeing you smile, and every time I do, I somehow forget what I was about to say. " +
-            "My words disappear, my thoughts get mixed up, and all I can think about is your smile. " +
-            "Maybe this is a little embarrassing to admit, but I really like you. " +
-            "I don't expect anything from you. I just wanted to be honest about how I feel. ❤️";
+<div
+    class="story"
+    id="story"
+>
 
-        /* Envelope click */
-        envelope.addEventListener("click", function () {
+    <div class="story-content">
 
-            if (opened) return;
+        <div
+            class="story-heart"
+            id="storyHeart"
+        ></div>
 
-            opened = true;
+        <div
+            class="story-text"
+            id="storyText"
+        ></div>
 
-            envelope.classList.add("open");
+    </div>
 
-            instruction.innerHTML = "Something special is waiting for you... 💕";
 
-            setTimeout(() => {
-                typeLetter();
-            }, 900);
+    <div
+        class="progress"
+        id="progress"
+    ></div>
 
-            setTimeout(() => {
-                createHeartBurst();
-            }, 1000);
+</div>
 
-            setTimeout(() => {
-                confession.classList.add("show");
-                createHearts();
-            }, 10000);
 
-        });
+<!-- =====================================================
+     LETTER
+===================================================== -->
 
-        /* Typing effect */
-        let index = 0;
+<div
+    class="letter-scene"
+    id="letterScene"
+>
 
-        function typeLetter() {
+    <div class="paper">
 
-            if (index < message.length) {
+        <h2>
+            Dear You, ❤️
+        </h2>
 
-                letterText.innerHTML =
-                    message.substring(0, index + 1) +
-                    '<span class="cursor"></span>';
+        <div
+            class="paper-content"
+            id="paperContent"
+        ></div>
 
-                index++;
+        <div class="signature">
+            — From someone who likes you
+            more than you know 💕
+        </div>
 
-                setTimeout(typeLetter, 35);
+    </div>
 
-            } else {
+</div>
 
-                letterText.innerHTML = message;
+
+<!-- =====================================================
+     FINAL
+===================================================== -->
+
+<div
+    class="final"
+    id="final"
+>
+
+    <div class="final-content">
+
+        <div class="final-heart">
+            ❤️
+        </div>
+
+        <h1>
+            So... I Like You.
+        </h1>
+
+        <p>
+
+            I don't know exactly when it happened,
+            but somewhere along the way,
+            you became someone really special to me.
+
+            <br><br>
+
+            And honestly...
+
+            every time I see your face,
+            especially when you smile,
+            something happens to me.
+
+            <br><br>
+
+            My mind goes blank.
+
+            I forget what I was going to say.
+
+            And suddenly,
+            all I can think about
+            is your smile.
+
+            <br><br>
+
+            Maybe I should have kept this
+            as a secret.
+
+            But I think you deserve to know.
+
+            <br><br>
+
+            <strong>
+                I really, really like you. ❤️
+            </strong>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   STAR CANVAS
+===================================================== */
+
+const canvas =
+    document.getElementById("stars");
+
+const ctx =
+    canvas.getContext("2d");
+
+let stars = [];
+
+
+function resizeCanvas() {
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+}
+
+resizeCanvas();
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+/* Create stars */
+
+for (
+    let i = 0;
+    i < 180;
+    i++
+) {
+
+    stars.push({
+
+        x:
+            Math.random() *
+            window.innerWidth,
+
+        y:
+            Math.random() *
+            window.innerHeight,
+
+        size:
+            Math.random() * 1.8,
+
+        opacity:
+            Math.random(),
+
+        speed:
+            .002 +
+            Math.random() * .01
+
+    });
+
+}
+
+
+/* Animate stars */
+
+function drawStars() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    stars.forEach(
+        star => {
+
+            star.opacity +=
+                star.speed;
+
+            if (
+                star.opacity >= 1 ||
+                star.opacity <= .1
+            ) {
+
+                star.speed *= -1;
+
             }
+
+
+            ctx.beginPath();
+
+            ctx.arc(
+                star.x,
+                star.y,
+                star.size,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                `rgba(
+                    255,
+                    220,
+                    235,
+                    ${star.opacity}
+                )`;
+
+            ctx.fill();
+
+        }
+    );
+
+
+    requestAnimationFrame(
+        drawStars
+    );
+
+}
+
+drawStars();
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const introScene =
+    document.getElementById(
+        "introScene"
+    );
+
+const startButton =
+    document.getElementById(
+        "startButton"
+    );
+
+const story =
+    document.getElementById(
+        "story"
+    );
+
+const storyText =
+    document.getElementById(
+        "storyText"
+    );
+
+const progress =
+    document.getElementById(
+        "progress"
+    );
+
+const letterScene =
+    document.getElementById(
+        "letterScene"
+    );
+
+const paperContent =
+    document.getElementById(
+        "paperContent"
+    );
+
+const finalScreen =
+    document.getElementById(
+        "final"
+    );
+
+
+/* =====================================================
+   STORY
+===================================================== */
+
+const storyLines = [
+
+    "Sometimes, someone enters your life...",
+
+    "and you don't really notice it at first.",
+
+    "Then, little by little...",
+
+    "you start looking forward to seeing them.",
+
+    "You notice their smile.",
+
+    "You remember the little things they say.",
+
+    "And somehow...",
+
+    "they become a little more special to you.",
+
+    "That's exactly what happened to me."
+
+];
+
+
+let currentStory = 0;
+
+
+/* Create progress dots */
+
+storyLines.forEach(
+    (_, index) => {
+
+        const dot =
+            document.createElement(
+                "div"
+            );
+
+        dot.className =
+            "progress-dot";
+
+        if (index === 0) {
+
+            dot.classList.add(
+                "active"
+            );
+
         }
 
-        /* Floating hearts */
-        function createHeart() {
+        progress.appendChild(
+            dot
+        );
 
-            const heart = document.createElement("div");
+    }
+);
 
-            heart.classList.add("heart");
 
-            const hearts = ["❤️", "💕", "💗", "💖", "💘", "💓"];
+const dots =
+    document.querySelectorAll(
+        ".progress-dot"
+    );
 
-            heart.innerHTML =
-                hearts[Math.floor(Math.random() * hearts.length)];
 
-            heart.style.left =
-                Math.random() * 100 + "vw";
+/* =====================================================
+   START
+===================================================== */
 
-            heart.style.fontSize =
-                (15 + Math.random() * 25) + "px";
+startButton.addEventListener(
+    "click",
+    startStory
+);
 
-            heart.style.animationDuration =
-                (5 + Math.random() * 5) + "s";
 
-            document.body.appendChild(heart);
+function startStory() {
 
-            setTimeout(() => {
-                heart.remove();
-            }, 10000);
+    introScene.classList.add(
+        "hide"
+    );
+
+
+    setTimeout(
+        () => {
+
+            story.classList.add(
+                "active"
+            );
+
+            showStoryLine();
+
+            createShootingStar();
+
+        },
+
+        1200
+    );
+
+}
+
+
+/* =====================================================
+   STORY LINE
+===================================================== */
+
+function showStoryLine() {
+
+    if (
+        currentStory >=
+        storyLines.length
+    ) {
+
+        setTimeout(
+            openLetter,
+            1000
+        );
+
+        return;
+
+    }
+
+
+    storyText.style.opacity =
+        "0";
+
+    storyText.style.transform =
+        "translateY(20px)";
+
+
+    setTimeout(
+        () => {
+
+            storyText.innerHTML =
+                storyLines[
+                    currentStory
+                ];
+
+            storyText.style.transition =
+                "all 1s ease";
+
+            storyText.style.opacity =
+                "1";
+
+            storyText.style.transform =
+                "translateY(0)";
+
+
+            dots.forEach(
+                dot =>
+                    dot.classList.remove(
+                        "active"
+                    )
+            );
+
+
+            dots[
+                currentStory
+            ].classList.add(
+                "active"
+            );
+
+
+            currentStory++;
+
+
+            setTimeout(
+                showStoryLine,
+                3000
+            );
+
+        },
+
+        700
+    );
+
+}
+
+
+/* =====================================================
+   SHOOTING STAR
+===================================================== */
+
+function createShootingStar() {
+
+    const star =
+        document.createElement(
+            "div"
+        );
+
+    star.className =
+        "shooting-star";
+
+
+    star.style.top =
+        Math.random() * 40 +
+        "%";
+
+
+    star.style.right =
+        Math.random() * 20 +
+        "%";
+
+
+    document.body.appendChild(
+        star
+    );
+
+
+    setTimeout(
+        () => star.remove(),
+        4000
+    );
+
+}
+
+
+/* =====================================================
+   LETTER
+===================================================== */
+
+const letterMessage =
+
+`I have been wanting to tell you this for a while.
+
+There is something about you that makes ordinary moments feel a little more special.
+
+I love seeing you smile.
+
+And every time I see that smile, I somehow forget what I was about to say.
+
+My words disappear.
+
+My thoughts get mixed up.
+
+And for a moment, all I can think about is you.
+
+Maybe this is a little embarrassing to admit.
+
+Maybe I should have kept it to myself.
+
+But I don't want to keep pretending that I don't feel anything.
+
+Because the truth is...
+
+I really like you.
+
+I don't expect anything from you.
+
+I don't want to pressure you.
+
+I just wanted you to know what has been quietly sitting in my heart for a while.
+
+And if you ever wondered...
+
+yes.
+
+It's you. ❤️`;
+
+
+/* =====================================================
+   OPEN LETTER
+===================================================== */
+
+function openLetter() {
+
+    story.classList.remove(
+        "active"
+    );
+
+
+    setTimeout(
+        () => {
+
+            letterScene.classList.add(
+                "show"
+            );
+
+            typeLetter();
+
+        },
+
+        1000
+    );
+
+}
+
+
+/* =====================================================
+   TYPE LETTER
+===================================================== */
+
+let letterIndex = 0;
+
+
+function typeLetter() {
+
+    if (
+        letterIndex <
+        letterMessage.length
+    ) {
+
+        paperContent.textContent =
+            letterMessage.substring(
+                0,
+                letterIndex + 1
+            );
+
+
+        letterIndex++;
+
+
+        setTimeout(
+            typeLetter,
+            35
+        );
+
+    }
+
+    else {
+
+        setTimeout(
+            () => {
+
+                letterScene.classList.remove(
+                    "show"
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        finalScreen.classList.add(
+                            "show"
+                        );
+
+                        startParticles();
+
+                    },
+
+                    1200
+                );
+
+            },
+
+            5000
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   FLOATING PARTICLES
+===================================================== */
+
+function createParticle() {
+
+    const particle =
+        document.createElement(
+            "div"
+        );
+
+    particle.className =
+        "particle";
+
+
+    const symbols = [
+
+        "❤️",
+        "💕",
+        "💗",
+        "💖",
+        "🌸",
+        "✦"
+
+    ];
+
+
+    particle.innerHTML =
+        symbols[
+            Math.floor(
+                Math.random() *
+                symbols.length
+            )
+        ];
+
+
+    particle.style.left =
+        Math.random() * 100 +
+        "vw";
+
+
+    particle.style.fontSize =
+        14 +
+        Math.random() * 24 +
+        "px";
+
+
+    particle.style.animationDuration =
+        5 +
+        Math.random() * 6 +
+        "s";
+
+
+    particle.style.setProperty(
+        "--random",
+        Math.random()
+    );
+
+
+    document.body.appendChild(
+        particle
+    );
+
+
+    setTimeout(
+        () => particle.remove(),
+        11000
+    );
+
+}
+
+
+function startParticles() {
+
+    setInterval(
+        createParticle,
+        350
+    );
+
+}
+
+
+/* =====================================================
+   SHOOTING STARS
+===================================================== */
+
+setInterval(
+    () => {
+
+        if (
+            Math.random() > .35
+        ) {
+
+            createShootingStar();
+
         }
 
-        function createHearts() {
+    },
 
-            setInterval(createHeart, 400);
-        }
+    5000
+);
 
-        /* Heart burst when envelope opens */
-        function createHeartBurst() {
 
-            for (let i = 0; i < 25; i++) {
+/* =====================================================
+   MUSIC BUTTON
+===================================================== */
 
-                setTimeout(() => {
+const musicButton =
+    document.getElementById(
+        "musicButton"
+    );
 
-                    const heart = document.createElement("div");
 
-                    heart.classList.add("heart");
+let musicOn = false;
 
-                    heart.innerHTML = "❤️";
 
-                    heart.style.left = "50%";
-                    heart.style.bottom = "45%";
+musicButton.addEventListener(
+    "click",
+    () => {
 
-                    heart.style.fontSize =
-                        (15 + Math.random() * 25) + "px";
+        musicOn =
+            !musicOn;
 
-                    heart.style.animationDuration =
-                        (2 + Math.random() * 2) + "s";
 
-                    document.body.appendChild(heart);
+        musicButton.textContent =
+            musicOn
+                ? "🔊"
+                : "♫";
 
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 5000);
+    }
+);
 
-                }, i * 80);
-            }
-        }
-
-        /* Close confession */
-        function closeConfession() {
-
-            confession.classList.remove("show");
-
-            instruction.innerHTML =
-                "You found my little secret. 💗";
-        }
-
-        /* Initial floating hearts */
-        for (let i = 0; i < 8; i++) {
-            setTimeout(createHeart, i * 500);
-        }
-
-    </script>
+</script>
 
 </body>
 </html>
