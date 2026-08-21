@@ -890,39 +890,55 @@ body {
     }
 }
 
-
 /* =====================================================
    MUSIC
 ===================================================== */
 
-.music {
+const bgMusic = document.getElementById("bgMusic");
+const musicButton = document.getElementById("musicButton");
 
-    position: fixed;
+let musicOn = false;
 
-    right: 25px;
-    top: 25px;
+bgMusic.volume = 0.45;
 
-    width: 45px;
-    height: 45px;
 
-    border-radius: 50%;
+/* Start music when Begin is clicked */
 
-    border:
-        1px solid
-        rgba(255,255,255,.2);
+startButton.addEventListener("click", () => {
 
-    background:
-        rgba(255,255,255,.06);
+    bgMusic.play()
+        .then(() => {
+            musicOn = true;
+            musicButton.textContent = "🔊";
+        })
+        .catch(error => {
+            console.log("Music could not start:", error);
+        });
 
-    color: white;
+}, { once: true });
 
-    cursor: pointer;
 
-    z-index: 500;
+/* Music button */
 
-    backdrop-filter: blur(10px);
-}
+musicButton.addEventListener("click", () => {
 
+    if (bgMusic.paused) {
+
+        bgMusic.play();
+
+        musicOn = true;
+        musicButton.textContent = "🔊";
+
+    } else {
+
+        bgMusic.pause();
+
+        musicOn = false;
+        musicButton.textContent = "♫";
+
+    }
+
+});
 
 /* =====================================================
    MOBILE
