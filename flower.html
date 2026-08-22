@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Little Surprise 🖤</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+
+            padding: 30px 0 50px;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(20, 55, 110, 0.35),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(30, 80, 160, 0.15),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #02030a,
+                    #050914,
+                    #02040b
+                );
+
+            color: white;
+        }
+
+
+        /* =========================
+           STARS
+        ========================= */
+
+        .stars {
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 10px #7db8ff;
+
+            animation:
+                twinkle 3s infinite ease-in-out;
+        }
+
+        .star:nth-child(1) {
+            top: 12%;
+            left: 15%;
+        }
+
+        .star:nth-child(2) {
+            top: 25%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+
+        .star:nth-child(3) {
+            top: 65%;
+            left: 10%;
+            animation-delay: 2s;
+        }
+
+        .star:nth-child(4) {
+            top: 75%;
+            left: 85%;
+            animation-delay: .5s;
+        }
+
+        .star:nth-child(5) {
+            top: 15%;
+            left: 55%;
+            animation-delay: 1.5s;
+        }
+
+        .star:nth-child(6) {
+            top: 50%;
+            left: 92%;
+            animation-delay: 2.5s;
+        }
+
+        .star:nth-child(7) {
+            top: 85%;
+            left: 35%;
+            animation-delay: 1.2s;
+        }
+
+        .star:nth-child(8) {
+            top: 35%;
+            left: 5%;
+            animation-delay: .8s;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: .2;
+                transform: scale(.6);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            position: relative;
+
+            width: 100%;
+            max-width: 700px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            z-index: 5;
+        }
+
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        h1 {
+            margin-bottom: 20px;
+
+            color: #dcecff;
+
+            font-size: clamp(25px, 5vw, 38px);
+
+            font-weight: 300;
+
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 0 10px rgba(80, 160, 255, .5),
+                0 0 30px rgba(30, 110, 255, .25);
+
+            opacity: 0;
+
+            animation:
+                fadeIn 2s ease forwards,
+                titleGlow 4s ease-in-out infinite 2s;
+        }
+
+        @keyframes titleGlow {
+
+            0%,
+            100% {
+                text-shadow:
+                    0 0 10px rgba(80, 160, 255, .4);
+            }
+
+            50% {
+                text-shadow:
+                    0 0 20px rgba(80, 160, 255, .8),
+                    0 0 45px rgba(30, 110, 255, .4);
+            }
+        }
+
+
+        /* =========================
+           FLOWER
+        ========================= */
+
+        .flower {
+            position: relative;
+
+            width: 260px;
+            height: 330px;
+
+            margin: 0 auto;
+
+            filter:
+                drop-shadow(
+                    0 0 20px rgba(40, 120, 255, .15)
+                );
+        }
+
+
+        /* =========================
+           STEM
+        ========================= */
+
+        .stem {
+            position: absolute;
+
+            width: 9px;
+            height: 190px;
+
+            left: 126px;
+            top: 105px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #061a18,
+                    #123c37,
+                    #061a18
+                );
+
+            transform-origin: bottom;
+
+            transform: scaleY(0);
+
+            animation:
+                growStem
+                2s
+                cubic-bezier(.2, .8, .2, 1)
+                forwards
+                1s;
+
+            box-shadow:
+                0 0 8px rgba(50, 160, 140, .35);
+        }
+
+        @keyframes growStem {
+
+            to {
+                transform: scaleY(1);
+            }
+        }
+
+
+        /* =========================
+           PETALS
+        ========================= */
+
+        .petal {
+            position: absolute;
+
+            width: 90px;
+            height: 115px;
+
+            border-radius:
+                60% 60%
+                55% 55%;
+
+            background:
+                radial-gradient(
+                    circle at 50% 80%,
+                    #2e83ff,
+                    #124da8 45%,
+                    #071936 75%,
+                    #020713 100%
+                );
+
+            opacity: 0;
+
+            box-shadow:
+                inset 0 0 15px rgba(130, 190, 255, .35),
+                0 0 15px rgba(20, 100, 255, .4),
+                0 0 35px rgba(20, 80, 220, .25);
+
+            animation:
+                bloom
+                1.3s
+                cubic-bezier(.2, .9, .2, 1)
+                forwards;
+        }
+
+        .p1 {
+            left: 85px;
+            top: 0;
+            animation-delay: 2.1s;
+        }
+
+        .p2 {
+            left: 25px;
+            top: 45px;
+            transform: rotate(-55deg);
+            animation-delay: 2.35s;
+        }
+
+        .p3 {
+            left: 145px;
+            top: 45px;
+            transform: rotate(55deg);
+            animation-delay: 2.6s;
+        }
+
+        .p4 {
+            left: 55px;
+            top: 95px;
+            transform: rotate(-25deg);
+            animation-delay: 2.85s;
+        }
+
+        .p5 {
+            left: 115px;
+            top: 95px;
+            transform: rotate(25deg);
+            animation-delay: 3.1s;
+        }
+
+        @keyframes bloom {
+
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            70% {
+                opacity: 1;
+                transform: scale(1.08);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
+        /* =========================
+           FLOWER CENTER
+        ========================= */
+
+        .center {
+            position: absolute;
+
+            width: 65px;
+            height: 65px;
+
+            left: 97px;
+            top: 75px;
+
+            border-radius: 50%;
+
+            z-index: 5;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #ffffff,
+                    #b9ddff 15%,
+                    #4d9cff 40%,
+                    #0a3270 70%,
+                    #020713
+                );
+
+            opacity: 0;
+
+            animation:
+                centerAppear
+                1.5s
+                ease
+                forwards
+                3.4s,
+
+                centerPulse
+                3s
+                ease-in-out
+                infinite
+                5s;
+
+            box-shadow:
+                0 0 15px #3e91ff,
+                0 0 35px rgba(40, 130, 255, .7),
+                0 0 70px rgba(20, 90, 255, .35);
+        }
+
+        .center::before {
+            content: "✦";
+
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            color: white;
+
+            font-size: 25px;
+
+            text-shadow:
+                0 0 10px white,
+                0 0 20px #69aaff;
+        }
+
+        @keyframes centerAppear {
+
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes centerPulse {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 15px #3e91ff,
+                    0 0 35px rgba(40, 130, 255, .5);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 25px #6ab0ff,
+                    0 0 60px rgba(40, 130, 255, .8),
+                    0 0 90px rgba(20, 90, 255, .3);
+            }
+        }
+
+
+        /* =========================
+           LEAVES
+        ========================= */
+
+        .leaf {
+            position: absolute;
+
+            width: 85px;
+            height: 42px;
+
+            opacity: 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0e6f65,
+                    #062d2c,
+                    #021616
+                );
+
+            border-radius:
+                100% 0 100% 0;
+
+            box-shadow:
+                0 0 12px rgba(20, 130, 120, .3);
+
+            animation:
+                leafAppear
+                1.5s
+                ease
+                forwards
+                3.7s;
+        }
+
+        .leaf.left {
+            left: 20px;
+            top: 185px;
+            transform: rotate(-25deg);
+        }
+
+        .leaf.right {
+            right: 15px;
+            top: 220px;
+            transform:
+                rotate(25deg)
+                scaleX(-1);
+        }
+
+        @keyframes leafAppear {
+
+            from {
+                opacity: 0;
+                transform:
+                    scale(0)
+                    rotate(-20deg);
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+
+        /* =========================
+           PHOTO GALLERY
+        ========================= */
+
+        .photo-gallery {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 14px;
+
+            max-width: 600px;
+
+            margin: 0 auto 25px;
+
+            opacity: 0;
+
+            animation:
+                galleryAppear
+                2s
+                ease
+                forwards
+                4s;
+        }
+
+        .photo {
+            width: 105px;
+            height: 125px;
+
+            padding: 4px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #071936,
+                    #2e83ff,
+                    #071936
+                );
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 0 12px rgba(50, 140, 255, .5),
+                0 0 30px rgba(30, 100, 255, .25);
+
+            transition:
+                .4s ease;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            border-radius: 10px;
+
+            border: 2px solid #020713;
+        }
+
+        .photo:hover {
+            transform:
+                translateY(-8px)
+                scale(1.08)
+                rotate(2deg);
+
+            box-shadow:
+                0 0 20px rgba(80, 160, 255, .8),
+                0 0 40px rgba(30, 100, 255, .4);
+        }
+
+        @keyframes galleryAppear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(25px)
+                    scale(.95);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        .message {
+            max-width: 550px;
+
+            margin: 0 auto;
+
+            padding: 0 20px;
+
+            color: #b8d8ff;
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            font-weight: 300;
+
+            letter-spacing: .5px;
+
+            opacity: 0;
+
+            text-shadow:
+                0 0 10px rgba(60, 140, 255, .35);
+
+            animation:
+                fadeIn
+                2s
+                ease
+                forwards
+                4.5s;
+        }
+
+        .message span {
+            color: #6daeff;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .back {
+            margin-top: 25px;
+
+            padding: 13px 28px;
+
+            border:
+                1px solid
+                rgba(100, 170, 255, .5);
+
+            border-radius: 30px;
+
+            background:
+                rgba(4, 13, 30, .8);
+
+            color: #cce4ff;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            opacity: 0;
+
+            box-shadow:
+                0 0 15px rgba(30, 100, 255, .2);
+
+            transition:
+                .3s ease;
+
+            animation:
+                fadeIn
+                2s
+                ease
+                forwards
+                5s;
+        }
+
+        .back:hover {
+            background: #0b2e62;
+
+            border-color: #70b0ff;
+
+            color: white;
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 0 20px rgba(50, 140, 255, .5),
+                0 0 40px rgba(30, 100, 255, .25);
+        }
+
+
+        /* =========================
+           FLOATING HEARTS
+        ========================= */
+
+        .heart {
+            position: fixed;
+
+            bottom: -30px;
+
+            color: #4e9eff;
+
+            font-size: 15px;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            animation:
+                floatHeart
+                8s
+                linear
+                infinite;
+        }
+
+        .heart:nth-child(1) {
+            left: 15%;
+            animation-delay: 1s;
+        }
+
+        .heart:nth-child(2) {
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        .heart:nth-child(3) {
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .heart:nth-child(4) {
+            left: 85%;
+            animation-delay: 5s;
+        }
+
+        @keyframes floatHeart {
+
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(0deg)
+                    scale(.7);
+
+                opacity: 0;
+            }
+
+            15% {
+                opacity: .6;
+            }
+
+            80% {
+                opacity: .4;
+            }
+
+            100% {
+                transform:
+                    translateY(-100vh)
+                    rotate(25deg)
+                    scale(1.2);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =========================
+           FADE IN
+        ========================= */
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            body {
+                padding-top: 20px;
+            }
+
+            h1 {
+                font-size: 25px;
+
+                margin-bottom: 5px;
+            }
+
+            .flower {
+                transform: scale(.78);
+
+                margin-top: -20px;
+
+                margin-bottom: -40px;
+            }
+
+            .photo-gallery {
+                gap: 10px;
+
+                padding: 0 10px;
+            }
+
+            .photo {
+                width: 90px;
+                height: 110px;
+            }
+
+            .message {
+                font-size: 16px;
+
+                padding:
+                    0 20px;
+            }
+
+            .back {
+                padding:
+                    11px 24px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <audio id="bgMusic" loop>
+    <source
+        src="The 1975 - About You (Official).mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+    <!-- =========================
+         STARS
+    ========================= -->
+
+    <div class="stars">
+
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+
+    </div>
+
+
+    <!-- =========================
+         FLOATING HEARTS
+    ========================= -->
+
+    <div class="heart">♥</div>
+    <div class="heart">♡</div>
+    <div class="heart">♥</div>
+    <div class="heart">♡</div>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <div class="container">
+
+
+        <!-- TITLE -->
+
+        <h1>
+            A little flower for you 🖤
+        </h1>
+
+
+        <!-- =========================
+             FLOWER
+        ========================= -->
+
+        <div class="flower">
+
+            <!-- Stem -->
+
+            <div class="stem"></div>
+
+
+            <!-- Petals -->
+
+            <div class="petal p1"></div>
+            <div class="petal p2"></div>
+            <div class="petal p3"></div>
+            <div class="petal p4"></div>
+            <div class="petal p5"></div>
+
+
+            <!-- Center -->
+
+            <div class="center"></div>
+
+
+            <!-- Leaves -->
+
+            <div class="leaf left"></div>
+            <div class="leaf right"></div>
+
+        </div>
+
+
+        <!-- =========================
+             HER 4 PHOTOS
+        ========================= -->
+
+        <div class="photo-gallery">
+
+            <div class="photo">
+                <img src="photo1.jpg" alt="Her photo">
+            </div>
+
+            <div class="photo">
+                <img src="photo2.jpg" alt="Her photo">
+            </div>
+
+            <div class="photo">
+                <img src="photo3.jpg" alt="Her photo">
+            </div>
+
+            <div class="photo">
+                <img src="photo4.jpg" alt="Her photo">
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             MESSAGE
+        ========================= -->
+
+        <p class="message">
+
+            I just wanted to take a moment to express my feelings and let you know how much you mean to me. You have brought so much joy and happiness into my quiet life,that pictures has value to me, and I wanted to share them with you as a small token of my appreciation. Your presence in my life has made.
+            And I know that we're just friends, but I hope that these pictures will serve as a reminder of the special bond we share and how much I value our friendship. Thank you for being such an amazing person and for making.
+            Your the best thing ever happened to me,your my ka chika at night and your my kaaway in the morning,and Im amized by the way where we can be so close and yet so far away.and im so proud of you even you're in the lowest point of your life, you still fighting even i see you crying you're amazing and strong, and don't think that the word is not valuing you,And you know na i'm so torpe talaga this is the first time that i can express my feelings to you, and i hope that you will understand me, and i hope that you will accept this little flower as a symbol of my love and admiration for you. I hope that it will bring a smile to your face and remind you of how special you are to me.
+            <span>
+            Every time I see you,even in the most random place like outside or on a bench,you make it look peaceful.You have soft smile and i swear its my favorite thing.
+             
+            </span>
+
+            🖤
+
+        </p>
+
+
+        <!-- =========================
+             BACK BUTTON
+        ========================= -->
+
+        <button
+            class="back"
+            onclick="history.back()">
+
+            Go Back 💌
+
+        </button>
+
+
+    </div>
+
+
+</body>
+
+</html>
