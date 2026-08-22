@@ -6,7 +6,6 @@
 
 <title>For Someone Special ❤️</title>
 
-<!-- Romantic font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600&display=swap" rel="stylesheet">
@@ -26,11 +25,12 @@
 html,
 body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
     overflow: hidden;
+
     font-family: Georgia, "Times New Roman", serif;
 
     background:
@@ -52,9 +52,13 @@ body {
 #stars {
     position: fixed;
     inset: 0;
+
     width: 100%;
     height: 100%;
+
     z-index: 1;
+
+    pointer-events: none;
 }
 
 
@@ -64,6 +68,7 @@ body {
 
 .moon {
     position: fixed;
+
     top: 9%;
     right: 12%;
 
@@ -128,6 +133,8 @@ body {
 
     z-index: 3;
 
+    pointer-events: none;
+
     animation:
         shootingStar 4s linear forwards;
 }
@@ -157,7 +164,7 @@ body {
 
 
 /* =====================================================
-   MAIN SCENE
+   INTRO SCENE
 ===================================================== */
 
 .scene {
@@ -165,6 +172,7 @@ body {
     inset: 0;
 
     display: flex;
+
     justify-content: center;
     align-items: center;
 
@@ -178,8 +186,7 @@ body {
 .scene.hide {
     opacity: 0;
 
-    transform:
-        scale(1.15);
+    transform: scale(1.15);
 
     pointer-events: none;
 }
@@ -264,19 +271,17 @@ body {
 .start-button {
     margin-top: 40px;
 
-    padding:
-        14px 35px;
+    padding: 14px 35px;
 
-    border:
-        1px solid
-        rgba(255,180,210,.5);
+    border: 1px solid rgba(255,180,210,.5);
 
     border-radius: 50px;
 
-    background:
-        rgba(255,255,255,.05);
+    background: rgba(255,255,255,.05);
 
     color: white;
+
+    font-family: Georgia, "Times New Roman", serif;
 
     font-size: 16px;
 
@@ -284,23 +289,21 @@ body {
 
     backdrop-filter: blur(10px);
 
-    transition:
-        .4s ease;
+    transition: .4s ease;
+
+    box-shadow:
+        0 0 20px rgba(255,100,170,.15);
 }
 
 .start-button:hover {
-    background:
-        rgba(255,110,170,.2);
+    background: rgba(255,110,170,.2);
 
-    border-color:
-        #ff9fc4;
+    border-color: #ff9fc4;
 
     box-shadow:
-        0 0 30px
-        rgba(255,100,170,.25);
+        0 0 30px rgba(255,100,170,.25);
 
-    transform:
-        translateY(-4px);
+    transform: translateY(-4px);
 }
 
 
@@ -361,10 +364,13 @@ body {
     color: #fff1f6;
 
     text-shadow:
-        0 0 20px
-        rgba(255,100,160,.2);
+        0 0 20px rgba(255,100,160,.2);
 
     min-height: 120px;
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 
 
@@ -379,12 +385,13 @@ body {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     display: flex;
 
     gap: 8px;
+
+    z-index: 25;
 }
 
 .progress-dot {
@@ -396,16 +403,14 @@ body {
     background:
         rgba(255,255,255,.2);
 
-    transition:
-        .5s ease;
+    transition: .5s ease;
 }
 
 .progress-dot.active {
     background: #ff9fc4;
 
     box-shadow:
-        0 0 12px
-        rgba(255,100,170,.8);
+        0 0 12px rgba(255,100,170,.8);
 }
 
 
@@ -422,11 +427,9 @@ body {
 
     position: relative;
 
-    transform:
-        rotate(-45deg);
+    transform: rotate(-45deg);
 
-    background:
-        #e95486;
+    background: #e95486;
 
     animation:
         heartPulse 1.5s
@@ -448,8 +451,7 @@ body {
 
     border-radius: 50%;
 
-    background:
-        #e95486;
+    background: #e95486;
 }
 
 .story-heart::before {
@@ -502,6 +504,8 @@ body {
 
     transition:
         opacity 1.5s ease;
+
+    padding: 20px;
 }
 
 .letter-scene.show {
@@ -517,6 +521,7 @@ body {
         min(720px, 82vh);
 
     overflow-y: auto;
+    overflow-x: hidden;
 
     padding:
         clamp(35px, 6vw, 70px);
@@ -548,6 +553,8 @@ body {
     font-family:
         Georgia,
         serif;
+
+    scrollbar-width: thin;
 }
 
 @keyframes paperOpen {
@@ -651,12 +658,16 @@ body {
     position: fixed;
     inset: 0;
 
+    overflow-y: auto;
+    overflow-x: hidden;
+
     z-index: 100;
 
     display: flex;
 
     justify-content: center;
-    align-items: center;
+
+    align-items: flex-start;
 
     text-align: center;
 
@@ -675,6 +686,8 @@ body {
 
     transition:
         opacity 1.5s ease;
+
+    -webkit-overflow-scrolling: touch;
 }
 
 .final.show {
@@ -683,29 +696,12 @@ body {
 }
 
 .final-content {
+    width: 90%;
     max-width: 750px;
 
-    animation:
-        finalAppear 2s ease;
-}
+    margin: auto;
 
-@keyframes finalAppear {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateY(40px)
-            scale(.9);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
+    padding: 60px 0 80px;
 }
 
 .final-heart {
@@ -761,6 +757,61 @@ body {
 
 .final strong {
     color: #ffabc8;
+}
+
+
+/* =====================================================
+   SURPRISE BUTTON
+===================================================== */
+
+.surprise-button {
+    margin-top: 40px;
+
+    padding: 15px 32px;
+
+    border: 1px solid rgba(255,180,210,.5);
+
+    border-radius: 50px;
+
+    background: rgba(255,255,255,.06);
+
+    color: white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+
+    transition: .4s ease;
+
+    box-shadow:
+        0 0 20px
+        rgba(255,100,170,.15);
+}
+
+.surprise-button:hover {
+    background:
+        rgba(255,110,170,.2);
+
+    border-color:
+        #ff9fc4;
+
+    box-shadow:
+        0 0 35px
+        rgba(255,100,170,.35);
+
+    transform:
+        translateY(-4px);
+}
+
+.surprise-button:active {
+    transform: scale(.96);
 }
 
 
@@ -843,6 +894,15 @@ body {
     z-index: 500;
 
     backdrop-filter: blur(10px);
+
+    transition: .3s ease;
+}
+
+.music:hover {
+    transform: scale(1.08);
+
+    background:
+        rgba(255,110,170,.2);
 }
 
 
@@ -860,12 +920,31 @@ body {
         top: 7%;
     }
 
+    .music {
+        right: 15px;
+        top: 15px;
+    }
+
+    .intro {
+        width: 88%;
+    }
+
+    .intro-small {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+
     .intro p {
         font-size: 16px;
     }
 
+    .story {
+        padding: 20px;
+    }
+
     .story-text {
         font-size: 25px;
+        line-height: 1.5;
     }
 
     .story-heart {
@@ -876,7 +955,13 @@ body {
         margin-bottom: 5px;
     }
 
+    .progress {
+        bottom: 25px;
+    }
+
     .paper {
+        width: 94vw;
+
         height: 82vh;
 
         padding:
@@ -897,10 +982,32 @@ body {
         font-size: 22px;
     }
 
-    .final p {
-        font-size: 17px;
+    .final {
+        padding: 20px;
     }
 
+    .final-content {
+        width: 92%;
+
+        padding:
+            50px 0 70px;
+    }
+
+    .final-heart {
+        font-size: 65px;
+    }
+
+    .final p {
+        font-size: 17px;
+
+        line-height: 1.8;
+    }
+
+    .surprise-button {
+        padding: 14px 26px;
+
+        font-size: 15px;
+    }
 }
 
 </style>
@@ -909,12 +1016,16 @@ body {
 
 <body>
 
+
 <!-- =====================================================
      MUSIC
 ===================================================== -->
 
 <audio id="bgMusic" loop>
-    <source src="Taylor.mp3" type="audio/mpeg">
+    <source
+        src="The 1975 - About You (Official).mp3"
+        type="audio/mpeg"
+    >
 </audio>
 
 
@@ -970,7 +1081,7 @@ body {
             class="start-button"
             id="startButton"
         >
-            Begin ❤️
+            Click ❤️
         </button>
 
     </div>
@@ -1022,7 +1133,7 @@ body {
     <div class="paper">
 
         <h2>
-            Dear You, ❤️
+            Dear Jan, ❤️
         </h2>
 
         <div
@@ -1069,7 +1180,9 @@ body {
 
             And honestly...
 
-            every time I see your face,
+            I enjoy talking to you more than anyone else.
+
+            Every time I see your face,
             especially when you smile,
             something happens to me.
 
@@ -1080,8 +1193,30 @@ body {
             I forget what I was going to say.
 
             And suddenly,
+
             all I can think about
+
             is your smile.
+
+            And I can't help but smile too.
+
+            And you know what?
+
+            I like that feeling.
+
+            Because it makes me feel like
+            I'm the happiest person in the world.
+
+            <br><br>
+
+            And I want to feel that way
+            every time I see you.
+
+            Your eyes, your smile, your laugh,
+            your voice, your presence...
+
+            They all make me feel like
+            I'm the luckiest person in the world.
 
             <br><br>
 
@@ -1098,12 +1233,23 @@ body {
 
         </p>
 
+
+        <!-- SURPRISE BUTTON -->
+
+        <button
+            class="surprise-button"
+            onclick="window.location.href='flower.html'"
+        >
+            Open My Surprise 🌸
+        </button>
+
     </div>
 
 </div>
 
 
 <script>
+
 
 /* =====================================================
    STAR CANVAS
@@ -1130,13 +1276,16 @@ function resizeCanvas() {
 
 resizeCanvas();
 
+
 window.addEventListener(
     "resize",
     resizeCanvas
 );
 
 
-/* Create stars */
+/* =====================================================
+   CREATE STARS
+===================================================== */
 
 for (
     let i = 0;
@@ -1169,7 +1318,9 @@ for (
 }
 
 
-/* Animate stars */
+/* =====================================================
+   ANIMATE STARS
+===================================================== */
 
 function drawStars() {
 
@@ -1281,7 +1432,7 @@ const musicButton =
 
 
 /* =====================================================
-   STORY
+   STORY LINES
 ===================================================== */
 
 const storyLines = [
@@ -1304,7 +1455,15 @@ const storyLines = [
 
     "That's exactly what happened to me.",
 
-    "But I see you just like my friend, and I don't want to ruin our friendship."
+    "But I see you as a friend, and I don't want to ruin our friendship.",
+
+    "But I can't help it anymore.",
+
+    "I like you.",
+
+    "And I hope you like the letter I made for you.",
+
+    "I hope you enjoy it. ❤️"
 
 ];
 
@@ -1312,7 +1471,9 @@ const storyLines = [
 let currentStory = 0;
 
 
-/* Create progress dots */
+/* =====================================================
+   CREATE PROGRESS DOTS
+===================================================== */
 
 storyLines.forEach(
     (_, index) => {
@@ -1359,11 +1520,7 @@ startButton.addEventListener(
 
 function startStory() {
 
-    /* ==========================================
-       START MUSIC
-       This works because it happens directly
-       after she clicks the Begin button.
-    ========================================== */
+    /* Start music */
 
     music.volume = 0.5;
 
@@ -1384,18 +1541,14 @@ function startStory() {
         });
 
 
-    /* ==========================================
-       HIDE INTRO
-    ========================================== */
+    /* Hide intro */
 
     introScene.classList.add(
         "hide"
     );
 
 
-    /* ==========================================
-       START STORY
-    ========================================== */
+    /* Start story */
 
     setTimeout(() => {
 
@@ -1442,13 +1595,10 @@ function showStoryLine() {
     setTimeout(
         () => {
 
-            storyText.innerHTML =
+            storyText.textContent =
                 storyLines[
                     currentStory
                 ];
-
-            storyText.style.transition =
-                "all 1s ease";
 
             storyText.style.opacity =
                 "1";
@@ -1581,6 +1731,10 @@ function openLetter() {
                 "show"
             );
 
+            letterIndex = 0;
+
+            paperContent.textContent = "";
+
             typeLetter();
 
         },
@@ -1652,6 +1806,9 @@ function typeLetter() {
    FLOATING PARTICLES
 ===================================================== */
 
+let particleInterval = null;
+
+
 function createParticle() {
 
     const particle =
@@ -1675,7 +1832,7 @@ function createParticle() {
     ];
 
 
-    particle.innerHTML =
+    particle.textContent =
         symbols[
             Math.floor(
                 Math.random() *
@@ -1722,16 +1879,21 @@ function createParticle() {
 
 function startParticles() {
 
-    setInterval(
-        createParticle,
-        350
-    );
+    if (particleInterval) {
+        return;
+    }
+
+    particleInterval =
+        setInterval(
+            createParticle,
+            350
+        );
 
 }
 
 
 /* =====================================================
-   SHOOTING STARS
+   RANDOM SHOOTING STARS
 ===================================================== */
 
 setInterval(
@@ -1754,27 +1916,31 @@ setInterval(
    MUSIC BUTTON
 ===================================================== */
 
-let musicOn = false;
-
-
 musicButton.addEventListener(
     "click",
     () => {
 
         if (music.paused) {
 
-            music.play();
+            music.play()
+                .then(() => {
 
-            musicOn = true;
+                    musicButton.textContent =
+                        "🔊";
 
-            musicButton.textContent =
-                "🔊";
+                })
+                .catch(error => {
+
+                    console.log(
+                        "Music could not start:",
+                        error
+                    );
+
+                });
 
         } else {
 
             music.pause();
-
-            musicOn = false;
 
             musicButton.textContent =
                 "♫";
