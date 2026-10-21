@@ -1,0 +1,405 @@
+/* ============================= */
+/* GENERAL PAGE */
+/* ============================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 30px;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #f9c2d9,
+        #fff0f5,
+        #f1e9f4
+    );
+}
+
+
+/* ============================= */
+/* LETTER CARD */
+/* ============================= */
+
+.letter {
+    width: 90%;
+    max-width: 650px;
+
+    background-color: #ffffff;
+
+    padding: 45px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+
+    border: 2px solid #ffd0df;
+}
+
+
+/* ============================= */
+/* TITLE */
+/* ============================= */
+
+h1 {
+    color: #d94f7d;
+
+    font-size: 35px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* ============================= */
+/* INTRO TEXT */
+/* ============================= */
+
+.intro {
+    color: #777;
+
+    font-size: 17px;
+
+    margin-bottom: 25px;
+}
+
+
+/* ============================= */
+/* HEART */
+/* ============================= */
+
+.heart {
+    font-size: 60px;
+
+    color: #e75480;
+
+    animation: heartbeat 1.5s infinite;
+}
+
+
+/* HEART ANIMATION */
+
+@keyframes heartbeat {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* ============================= */
+/* BUTTON CONTAINER */
+/* ============================= */
+
+.button-container {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+/* ============================= */
+/* BUTTON */
+/* ============================= */
+
+button {
+    background-color: #e75480;
+
+    color: white;
+
+    border: none;
+
+    padding: 13px 28px;
+
+    border-radius: 30px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow: 0 5px 15px rgba(231, 84, 128, 0.3);
+}
+
+
+/* BUTTON HOVER */
+
+button:hover {
+    background-color: #c7436b;
+
+    transform: scale(1.07);
+}
+
+
+/* ============================= */
+/* SECRET MESSAGE */
+/* ============================= */
+
+#message {
+    display: none;
+
+    margin-top: 35px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #ffd0df;
+
+    text-align: left;
+
+    color: #555;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    animation: fadeIn 1s ease;
+}
+
+
+/* ============================= */
+/* ENDING MESSAGE */
+/* ============================= */
+
+.ending {
+    margin-top: 30px;
+
+    text-align: center;
+
+    color: #d94f7d;
+
+    font-weight: bold;
+
+    font-size: 18px;
+}
+
+
+/* ============================= */
+/* FACE POPUP */
+/* ============================= */
+
+.popup {
+    display: none;
+
+    position: fixed;
+
+    z-index: 1000;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.55);
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+
+/* ============================= */
+/* POPUP BOX */
+/* ============================= */
+
+.popup-content {
+    position: relative;
+
+    background-color: white;
+
+    width: 90%;
+    max-width: 400px;
+
+    padding: 25px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+
+    animation: popupAnimation 0.4s ease;
+}
+
+
+/* ============================= */
+/* YOUR PHOTO */
+/* ============================= */
+
+.popup-content img {
+    width: 220px;
+    height: 220px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 5px solid #ffd0df;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ============================= */
+/* POPUP TITLE */
+/* ============================= */
+
+.popup-content h2 {
+    color: #d94f7d;
+
+    margin-top: 20px;
+
+    margin-bottom: 10px;
+}
+
+
+/* ============================= */
+/* POPUP TEXT */
+/* ============================= */
+
+.popup-content p {
+    color: #666;
+
+    line-height: 1.6;
+
+    font-size: 16px;
+}
+
+
+/* ============================= */
+/* CLOSE BUTTON */
+/* ============================= */
+
+.close {
+    position: absolute;
+
+    top: 8px;
+    right: 15px;
+
+    font-size: 30px;
+
+    color: #d94f7d;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.close:hover {
+    color: #c7436b;
+
+    transform: scale(1.2);
+}
+
+
+/* ============================= */
+/* POPUP ANIMATION */
+/* ============================= */
+
+@keyframes popupAnimation {
+
+    from {
+        opacity: 0;
+
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1);
+    }
+}
+
+
+/* ============================= */
+/* FADE ANIMATION */
+/* ============================= */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* ============================= */
+/* PHONE SCREEN */
+/* ============================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .letter {
+        width: 100%;
+
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .heart {
+        font-size: 50px;
+    }
+
+    #message {
+        font-size: 15px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .button-container {
+        flex-direction: column;
+    }
+
+    .popup-content img {
+        width: 180px;
+        height: 180px;
+    }
+}
