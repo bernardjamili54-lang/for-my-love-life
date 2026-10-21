@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Letter For You ♡</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- BACKGROUND MUSIC -->
+    <audio id="backgroundMusic" loop>
+        <source src="Joji - SLOW DANCING IN THE DARK.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- LETTER CARD -->
+    <div class="letter">
+
+        <div class="heart">♡</div>
+
+        <h1>A Letter For You</h1>
+
+        <p class="intro">
+            For the days when everything feels a little too much... ♡
+        </p>
+
+
+        <!-- BUTTONS -->
+        <div class="button-container">
+
+            <button onclick="openLetter()">
+                💌 Open My Letter
+            </button>
+
+            <button id="musicButton" onclick="toggleMusic()">
+                🎵 Play Our Song
+            </button>
+
+            <button onclick="showFace()">
+                👀 One More Thing...
+            </button>
+
+        </div>
+
+
+        <!-- LETTER -->
+        <div id="message">
+
+            <p>
+                Hey, I know things have been really hard for you lately,
+                especially with school and all the pressure you're dealing with.
+            </p>
+
+            <p>
+                I just want you to know that you don't have to figure
+                everything out all at once. It's okay to feel tired.
+                It's okay to take a break. You don't always have to be
+                productive or have everything under control.
+            </p>
+
+            <p>
+                Please don't be too hard on yourself. Your grades,
+                deadlines, and mistakes don't define how capable you are.
+                I see how much effort you're putting in, even on the days
+                when you feel like you're not doing enough.
+            </p>
+
+            <p>
+                I'm proud of you, not only when you succeed, but also
+                when you keep trying even when things get difficult.
+            </p>
+
+            <p>
+                And when everything starts to feel too heavy, remember
+                that you don't have to carry it all by yourself.
+                I'm here. You can talk to me, complain to me, cry if
+                you need to, or we can just sit quietly together.
+            </p>
+
+            <p>
+                Take things one day at a time, okay?
+                You don't need to have your whole future figured out right now.
+            </p>
+
+            <p>
+                Believe in yourself a little more.
+                And on the days when that's difficult,
+                I'll believe in you for you. ♡
+            </p>
+
+            <p class="ending">
+                You've got this, love. ♡
+                <br><br>
+                I'm always here for you.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- FACE POPUP -->
+    <!-- ============================= -->
+
+    <div id="facePopup" class="popup">
+
+        <div class="popup-content">
+
+            <span class="close" onclick="closeFace()">
+                
+            </span>
+
+            <img src="pic.jpg" alt="That's me ♡">
+
+            <h2>Surprise! ♡</h2>
+
+            <p>
+                Whenever things get hard,
+                just remember that I'm always here for you. 💗
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================= -->
+
+    <script>
+
+        // OPEN LETTER
+        function openLetter() {
+
+            const message = document.getElementById("message");
+
+            message.style.display = "block";
+        }
+
+
+        // PLAY / PAUSE MUSIC
+        function toggleMusic() {
+
+            const music = document.getElementById("backgroundMusic");
+            const button = document.getElementById("musicButton");
+
+            music.volume = 0.5;
+
+            if (music.paused) {
+
+                music.play();
+
+                button.innerHTML = "⏸ Pause Our Song";
+
+            } else {
+
+                music.pause();
+
+                button.innerHTML = "🎵 Play Our Song";
+
+            }
+        }
+
+
+        // SHOW FACE
+        function showFace() {
+
+            const popup = document.getElementById("facePopup");
+
+            popup.style.display = "flex";
+        }
+
+
+        // CLOSE FACE
+        function closeFace() {
+
+            const popup = document.getElementById("facePopup");
+
+            popup.style.display = "none";
+        }
+
+
+        // CLOSE POPUP WHEN CLICKING OUTSIDE
+        window.onclick = function(event) {
+
+            const popup = document.getElementById("facePopup");
+
+            if (event.target === popup) {
+
+                popup.style.display = "none";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
